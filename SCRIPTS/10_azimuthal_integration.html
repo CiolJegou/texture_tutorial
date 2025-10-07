@@ -1,0 +1,1730 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>1 - Azimuthal integration &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'SCRIPTS/10_azimuthal_integration';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2 - Collect and downsamples" href="11_Collect_and_downsample.html" />
+    <link rel="prev" title="Welcome to your Jupyter Book" href="../intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logoID11.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="../_static/logoID11.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1 - Azimuthal integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Collect_and_downsample.html">2 - Collect and downsamples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Geometry_and_corrections.html">3 - Geometry and corrections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_Reconstruct_slice_by_slice.html">4 - Reconstruction slice by slice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_plot_3d_tomogram.html">5 - Plot 3D tomogram</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FSCRIPTS/10_azimuthal_integration.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/SCRIPTS/10_azimuthal_integration.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1 - Azimuthal integration</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters-of-the-experiment">Parameters of the experiment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-1-frame">Load 1 frame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chosing-pyfai-integration-parameters">Chosing pyFAI integration parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-peak-positions">Finding the peak positions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-azimuthal-integration">2d azimuthal integration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background-substraction">Background substraction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-0">method 0</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1">method 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-with-background-not-for-eiger">method 2 (with background) / not for eiger</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#azimuthal-mask">Azimuthal mask</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#process-1-full-frame">Process 1 full frame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-integration-mask-parameters">Save integration / mask parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#launch-batch-script-to-process-multiple-images">Launch batch script to process multiple images</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <p>For this notebook, you need to install :</p>
+<ul class="simple">
+<li><p>the <strong>pyFAI library</strong> : <a class="reference external" href="https://pyfai.readthedocs.io/en/stable/">https://pyfai.readthedocs.io/en/stable/</a></p></li>
+<li><p><strong>ImageD11</strong> : <a class="reference external" href="https://imaged11.readthedocs.io/en/latest/">https://imaged11.readthedocs.io/en/latest/</a></p></li>
+</ul>
+<section class="tex2jax_ignore mathjax_ignore" id="azimuthal-integration">
+<h1>1 - Azimuthal integration<a class="headerlink" href="#azimuthal-integration" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">fabio</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyFAI</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">h5py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="parameters-of-the-experiment">
+<h2>Parameters of the experiment<a class="headerlink" href="#parameters-of-the-experiment" title="Permalink to this heading">#</a></h2>
+<p>In this first cell, you input all your experiment parameters. <br />
+The <strong>number of rotation</strong> corresponds to the number of steps in omega (<em>i.e.</em> rotation of the sample).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">experiment_number</span> <span class="o">=</span> <span class="s1">&#39;ma6795&#39;</span>
+<span class="n">experiment_date</span> <span class="o">=</span> <span class="s1">&#39;20250826&#39;</span>
+<span class="n">detector</span> <span class="o">=</span> <span class="s1">&#39;eiger&#39;</span>
+<span class="n">number_of_rotations</span> <span class="o">=</span> <span class="mi">1800</span>
+
+<span class="n">path_RAW_DATA</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;/data/visitor/</span><span class="si">{</span><span class="n">experiment_number</span><span class="si">}</span><span class="s1">/id11/</span><span class="si">{</span><span class="n">experiment_date</span><span class="si">}</span><span class="s1">/RAW_DATA&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;All the existing samples :&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path_RAW_DATA</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>All the existing samples :
+CeO2_200
+tdxrd_test_posth8
+PCT_check_after_mdt
+sample
+live_h8_60sec
+subvolume_highres_posth12
+Fe_T0_tdxrd_no_furnace
+textom_posth12
+live_h10_90sec
+SI_end
+textom_posth10
+test_tdxrd
+test_tdxrd_post_h2
+Fe_liveheating_TDXRD_redo
+tdxrd_test_posth12_redo
+live_h5_30sec
+textom_post_h1_redo_2
+CeO2_400
+live_h13_240sec
+textom_posth13
+textom_post_h1_redo
+live_h11_120sec
+textom_post_h1
+test_tdxrd_post_h4
+CeO2
+clear_hotpix_eiger
+Fe_TDXRD_610_sample2_nofurnace_redo
+tdxrd_post_h1_0.1_redo
+CeO2_200mm
+tdxrd_test_posth13
+textom_post_h8_redo
+textom_post_h9
+live_h9_120sec
+Textom_t0_redo
+Fe_TDXRD_610_sample2_nofurnace
+textom_posth14_post_beamdown
+Fe_liveheating_TDXRD_redo_610
+live_h1_60sec
+test_texture
+textom_posth14_redo
+distortion
+tdxrd_test_posth14
+tdxrd_test_posth13_redo
+subvolume_highres_redo
+ma6795_id11.h5
+test_macro
+live_h7_60sec
+tdxrd_test_posth11
+textom_posth15
+tdxrd_test_posth12_redo2
+align_textom
+textom_post_h5
+Si_200
+textom_posth10_redo
+textom_posth11
+align_2
+tdxrd_test_posth13_redo_2
+pin
+Textom_t0
+tdxrd_test_posth14_post_beamdown
+subvolume_highres
+Fe_liveheating_TDXRD_610_sample2_redo
+tdxrd_test_posth9
+tdxrd_test_posth12
+live_h11_240sec
+textom_posth11_redo
+live_h2_30sec
+live_h4_60sec
+test_tdxrd_post_h3
+live_h3_30sec_redo
+tdxrd_test_posth10
+live_h14_240sec
+beamsize
+tdxrd_test_posth7
+tdxrd_test_posth12_redo3
+textom_posth14
+test_tdxrd_post_h5
+tdxrd_post_h1_0.1
+Fe_T0_tdxrd_no_furnace_faster
+</pre></div>
+</div>
+</div>
+</div>
+<p>You select (<em>copy past below</em>) the sample you want to reconstruct among all the samples that were created during the experiment at ID11.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Input the sample you want to work with</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="s1">&#39;textom_posth14_post_beamdown&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;All the existing dataset for this sample :&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_RAW_DATA</span><span class="p">,</span><span class="n">sample</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">:])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>All the existing dataset for this sample :
+amdown.h5
+align
+z13_redo
+z9_redo
+z10_redo
+z11_redo
+z7_redo
+z0_redo
+z14_redo
+z12_redo
+z3_redo
+z2_redo
+z6_redo
+z4_redo
+z8_redo
+z5_redo
+z1_redo
+</pre></div>
+</div>
+</div>
+</div>
+<p>You select (<em>copy past below</em>) any dataset you want that will be used to select the integration parameters for the rest of the study.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Input the z-slice used for testing the workflow.</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="s1">&#39;z0_redo&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Setting up different path for the chosen sample, and checking that the number of existing files corresponds to the number of dty steps of the experimental scan.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#path of the dataset folder</span>
+<span class="n">path_ds</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_RAW_DATA</span><span class="p">,</span> <span class="n">sample</span><span class="p">,</span> <span class="n">sample</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">dataset</span><span class="p">)</span>
+<span class="c1">#path of the dataset h5 file</span>
+<span class="n">path_h5</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_ds</span><span class="p">,</span> <span class="n">sample</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">dataset</span><span class="o">+</span><span class="s1">&#39;.h5&#39;</span><span class="p">)</span>
+
+<span class="c1"># -1 for the h5 file</span>
+<span class="n">n_files</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path_ds</span><span class="p">))</span><span class="o">-</span><span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;There is </span><span class="si">{</span><span class="n">n_files</span><span class="si">}</span><span class="s1"> files in this dataset folder (</span><span class="si">{</span><span class="n">n_files</span><span class="si">}</span><span class="s1"> dty steps)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There is 105 files in this dataset folder (105 dty steps)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-1-frame">
+<h2>Load 1 frame<a class="headerlink" href="#load-1-frame" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get interactive tools for plots</span>
+<span class="c1"># %matplotlib widget</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="c1"># Choose a single frame</span>
+<span class="c1">## This is the image corresponding to the n_image omega step</span>
+<span class="n">n_image</span> <span class="o">=</span> <span class="mi">900</span>
+<span class="c1">## This is the scan corresponding to the n_position dty step</span>
+<span class="n">n_position</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_files</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">5</span>
+
+<span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path_h5</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">file</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">n_position</span><span class="p">)</span><span class="si">}</span><span class="s1">.1/measurement/</span><span class="si">{</span><span class="n">detector</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">n_image</span><span class="p">,:,:]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">,</span><span class="n">vmin</span> <span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+
+<span class="c1">#plt.imshow(np.log10(im+1e-1),vmin =0,vmax=2, cmap = &#39;jet&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Example frame&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/36fdf5a1b3a8c99c9c2b538945f0a12ceea36a17e7a41a8828988e275749cfee.png" src="../_images/36fdf5a1b3a8c99c9c2b538945f0a12ceea36a17e7a41a8828988e275749cfee.png" />
+</div>
+</div>
+</section>
+<section id="chosing-pyfai-integration-parameters">
+<h2>Chosing pyFAI integration parameters<a class="headerlink" href="#chosing-pyfai-integration-parameters" title="Permalink to this heading">#</a></h2>
+<p>The <strong>poni file</strong> corresponds to a calibration file done before (or after) the experiment to calibrate the detector distance from the sample and its tilts.<br />
+The calibration is done with a silicon single crystal, hence the name : si_fit.<br />
+The <strong>mask file</strong> is an image that maps all inactive pixels of the detector.<br /></p>
+<ul class="simple">
+<li><p><strong>n_radial</strong> : Number of radial bins (from the center to the edge of the detector)</p></li>
+<li><p><strong>radial_range</strong> : the integration will only be computed within these bounds.</p></li>
+<li><p><strong>polarization_factor</strong> : between -1 and +1. 0 for circular polarization.</p></li>
+<li><p><strong>unit</strong> : output units, “q_nm^-1” (default), “2th_deg”, “r_mm”.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_radial</span> <span class="o">=</span> <span class="mi">2000</span>
+<span class="n">radial_range</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">polarization_factor</span> <span class="o">=</span> <span class="mf">0.95</span>
+<span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;2th_deg&#39;</span>
+
+<span class="c1">#Poni path, from the calibration step</span>
+<span class="n">poni_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;/data/visitor/</span><span class="si">{</span><span class="n">experiment_number</span><span class="si">}</span><span class="s1">/id11/</span><span class="si">{</span><span class="n">experiment_date</span><span class="si">}</span><span class="s1">/SCRIPTS/si_fit.poni&#39;</span>
+
+<span class="c1">#Mask path for the corresponding detector</span>
+<span class="n">mask_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;/data/visitor/</span><span class="si">{</span><span class="n">experiment_number</span><span class="si">}</span><span class="s1">/id11/</span><span class="si">{</span><span class="n">experiment_date</span><span class="si">}</span><span class="s1">/SCRIPTS/eiger_mask_E-08-0144_20250819.edf&#39;</span>
+
+<span class="c1">#Create a pyFAI integrator</span>
+<span class="n">ai</span> <span class="o">=</span> <span class="n">pyFAI</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">poni_path</span><span class="p">)</span>
+<span class="c1">#load the mask</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">fabio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">mask_path</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+
+<span class="n">integration_args</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;npt&#39;</span><span class="p">:</span><span class="n">n_radial</span><span class="p">,</span><span class="s1">&#39;radial_range&#39;</span><span class="p">:</span><span class="n">radial_range</span><span class="p">,</span><span class="s1">&#39;unit&#39;</span><span class="p">:</span><span class="n">unit</span><span class="p">,</span><span class="s1">&#39;mask&#39;</span><span class="p">:</span><span class="n">mask</span><span class="p">,</span>
+                    <span class="s1">&#39;polarization_factor&#39;</span><span class="p">:</span><span class="n">polarization_factor</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We do the radial integration of the image we plotted before. <br />
+You can get more detail about azimuthal integration on the pyFAI website : <a class="reference external" href="https://pyfai.readthedocs.io/en/stable/">Link towards pyfai.readthedocs</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tt_deg</span><span class="p">,</span> <span class="n">intens</span> <span class="o">=</span> <span class="n">ai</span><span class="o">.</span><span class="n">integrate1d_ng</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="o">**</span><span class="n">integration_args</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tt_deg</span><span class="p">,</span> <span class="n">intens</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;2theta,(deg)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Intensity&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="c1"># fig.show()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4c32996ddb86afd78706ce30f989b2e8e97cb8f965ee27f4b7cbf024e7be6899.png" src="../_images/4c32996ddb86afd78706ce30f989b2e8e97cb8f965ee27f4b7cbf024e7be6899.png" />
+</div>
+</div>
+</section>
+<section id="finding-the-peak-positions">
+<h2>Finding the peak positions<a class="headerlink" href="#finding-the-peak-positions" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exec</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/data/id11/nanoscope/install_ImageD11_from_git.py&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="c1"># python environment stuff</span>
+<span class="n">PYTHONPATH</span> <span class="o">=</span> <span class="n">setup_ImageD11_from_git</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;HOME&#39;</span><span class="p">],</span><span class="s1">&#39;Code&#39;</span><span class="p">,</span> <span class="s1">&#39;Tutorial&#39;</span><span class="p">,</span> <span class="s1">&#39;SCRIPTS&#39;</span><span class="p">),</span> <span class="s1">&#39;ImageD11&#39;</span> <span class="p">)</span><span class="c1"># ( os.path.join( os.environ[&#39;HOME&#39;],&#39;Code&#39;), &#39;ImageD11_git&#39; )</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># Setting path via: 
+sys.path.insert(0, /home/esrf/ljegou/Code/Tutorial/SCRIPTS/ImageD11 )
+# Running from: /home/esrf/ljegou/Code/Tutorial/SCRIPTS/ImageD11/ImageD11/__init__.py
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">ImageD11.parameters</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ImageD11.unitcell</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ImageD11.transform</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>wavelength : depends on the Energy you used for this experiment : E = hc/lambda :: E ~= 12.3984/lambda</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wavelength</span> <span class="o">=</span> <span class="mf">0.189723</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This methods requires you to know which phase you are studying. <br />
+Currently (06/10/2025), 3 crystal families are available within this workflow : cubic, orthorombic and hexagonal. <br />
+In this case it is BCC cubic iron.</p>
+<ul class="simple">
+<li><p><strong>a,b,c</strong>: crystal lattice edges</p></li>
+<li><p><strong>alpha, beta, gamma</strong>: crystal lattice angles</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">2.866</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">a</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="n">alpha</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="n">alpha</span>
+<span class="n">uc</span> <span class="o">=</span> <span class="n">ImageD11</span><span class="o">.</span><span class="n">unitcell</span><span class="o">.</span><span class="n">unitcell</span><span class="p">([</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">beta</span><span class="p">,</span><span class="n">gamma</span><span class="p">],</span><span class="mi">229</span><span class="p">)</span>
+<span class="n">uc</span><span class="o">.</span><span class="n">makerings</span><span class="p">(</span> <span class="mi">2</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><strong>bragg_tt_deg_list</strong>: list of angles corresponding to the bragg reflections (<em>i.e.</em> two thetas rings).</p></li>
+<li><p><strong>n_tth</strong>: Number of rings considered for the integration</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bragg_tt_deg_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span> <span class="n">wavelength</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">uc</span><span class="o">.</span><span class="n">ringds</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="p">)</span> <span class="p">)</span>
+<span class="n">n_tth</span> <span class="o">=</span> <span class="mi">9</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Generate the ring parameters for n_tth rings</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Get the different hkls</span>
+<span class="n">hkl_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">cpt</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">ring</span> <span class="ow">in</span> <span class="n">uc</span><span class="o">.</span><span class="n">ringds</span><span class="p">[:</span><span class="n">n_tth</span><span class="p">]:</span>
+    <span class="c1">#This gives all the hkl that can produce this ring, multiplicity due to symmetry</span>
+    <span class="n">hkls</span> <span class="o">=</span> <span class="n">uc</span><span class="o">.</span><span class="n">ringhkls</span><span class="p">[</span><span class="n">ring</span><span class="p">]</span>
+    <span class="n">hkl_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hkls</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ring n°</span><span class="si">{}</span><span class="s1">, Multiplicity: </span><span class="si">{}</span><span class="s1">, hkl: </span><span class="si">{}</span><span class="s1">, dspace: </span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cpt</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">hkls</span><span class="p">),</span> <span class="n">hkls</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">ring</span><span class="p">))</span>
+    <span class="n">cpt</span> <span class="o">+=</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ring n°0, Multiplicity: 12, hkl: (1, 1, 0), dspace: 0.4934
+Ring n°1, Multiplicity: 6, hkl: (0, 2, 0), dspace: 0.6978
+Ring n°2, Multiplicity: 24, hkl: (2, 1, 1), dspace: 0.8547
+Ring n°3, Multiplicity: 12, hkl: (2, 2, 0), dspace: 0.9869
+Ring n°4, Multiplicity: 24, hkl: (0, 1, 3), dspace: 1.1034
+Ring n°5, Multiplicity: 8, hkl: (2, 2, 2), dspace: 1.2087
+Ring n°6, Multiplicity: 48, hkl: (2, 1, 3), dspace: 1.3055
+Ring n°7, Multiplicity: 6, hkl: (4, 0, 0), dspace: 1.3957
+Ring n°8, Multiplicity: 36, hkl: (4, 1, 1), dspace: 1.4803
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this next plot, the integrated pattern peaks should match with the theoretical peaks you computed. <br />
+If some peaks are not matched, maybe you have some minor phases in your sample.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">ymax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">intens</span><span class="p">)</span>
+<span class="n">cpt</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">hkl</span><span class="p">,</span> <span class="n">bragg_twotheta_deg</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">hkl_list</span><span class="p">,</span> <span class="n">bragg_tt_deg_list</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">bragg_twotheta_deg</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="n">ymax</span><span class="o">*</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">ymax</span><span class="o">*</span><span class="mf">0.8</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">bragg_twotheta_deg</span><span class="o">-</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">ymax</span><span class="o">*</span><span class="mf">0.8</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">hkl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}{</span><span class="n">hkl</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}{</span><span class="n">hkl</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+    <span class="n">cpt</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tt_deg</span><span class="p">,</span> <span class="n">intens</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;2theta,(deg)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Intensity&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">2.6</span><span class="p">,</span> <span class="mi">17</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">*</span><span class="mf">1.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="c1"># fig.show()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f3f33897af84b248ad4c6f08928a02fe994f2002b8bf854d4ed0cad9d2f25def.png" src="../_images/f3f33897af84b248ad4c6f08928a02fe994f2002b8bf854d4ed0cad9d2f25def.png" />
+</div>
+</div>
+<p>For texture tomography, we are only interested in the signal around peaks (the rest of the picture is just noise or minor phases). <br />
+In the next step, we chose a small two theta window to select how much signal we extract around each peak. <br /></p>
+<ul class="simple">
+<li><p><strong>fixed_width_deg</strong>: two thetas window around one peak for the integration.</p></li>
+<li><p><strong>tt_ranges</strong>: list of two thetas ranges for integrations.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fixed_width_deg</span> <span class="o">=</span> <span class="mf">0.4</span>
+<span class="n">tt_ranges</span> <span class="o">=</span> <span class="p">[(</span><span class="n">tt_deg</span><span class="o">-</span><span class="n">fixed_width_deg</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">tt_deg</span><span class="o">+</span><span class="n">fixed_width_deg</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">tt_deg</span> <span class="ow">in</span> <span class="n">bragg_tt_deg_list</span><span class="p">[:</span><span class="n">n_tth</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tt_deg</span><span class="p">,</span> <span class="n">intens</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">tt_range</span> <span class="ow">in</span> <span class="n">tt_ranges</span><span class="p">:</span>
+    <span class="n">peak_indicies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">tt_deg</span><span class="o">&gt;=</span><span class="n">tt_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tt_deg</span><span class="o">&lt;</span><span class="n">tt_range</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tt_deg</span><span class="p">[</span><span class="n">peak_indicies</span><span class="p">],</span> <span class="n">intens</span><span class="p">[</span><span class="n">peak_indicies</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">peak_masks</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">tt_deg</span><span class="o">&gt;=</span><span class="n">tt_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tt_deg</span><span class="o">&lt;</span><span class="n">tt_range</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">tt_range</span> <span class="ow">in</span> <span class="n">tt_ranges</span><span class="p">]</span> 
+<span class="n">any_peak_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">peak_masks</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;2theta,(deg)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Intensity&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">2.6</span><span class="p">,</span> <span class="mf">16.5</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="n">ymax</span><span class="o">*</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">ymax</span><span class="o">*</span><span class="mf">1.3</span><span class="p">)</span>
+<span class="n">leg</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">hkl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}{</span><span class="n">hkl</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}{</span><span class="n">hkl</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">hkl</span> <span class="ow">in</span> <span class="n">hkl_list</span><span class="p">]</span>
+<span class="n">leg</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Full data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">leg</span><span class="p">)</span>
+<span class="c1"># fig.show()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0xe189a75ac00&gt;
+</pre></div>
+</div>
+<img alt="../_images/b0b355f5eaa89f18ef593ce8c146b1cff4b107ce1f832a1f50c89a5de82ea7ae.png" src="../_images/b0b355f5eaa89f18ef593ce8c146b1cff4b107ce1f832a1f50c89a5de82ea7ae.png" />
+</div>
+</div>
+</section>
+<section id="d-azimuthal-integration">
+<h2>2d azimuthal integration<a class="headerlink" href="#d-azimuthal-integration" title="Permalink to this heading">#</a></h2>
+<p>Texture tomography is the middle ground between powder and single crystal diffraction, between nice diffraction rings and sharp spotty diffraction peaks.<br />
+Thus, the signal not only depends on the two theta angle, but also on the azimuthal angle (in the detector plane).</p>
+<ul class="simple">
+<li><p><strong>n_azim</strong>: number of azimuthal bins (at a given radius), only for 2d integration.</p></li>
+<li><p><strong>azi_range</strong>: azimuthal range for the integration. For the Eiger detector on ID11, -180 is the left (west)</p></li>
+<li><p><strong>integration_args2D</strong>: arguments for 2D integration</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_azim</span> <span class="o">=</span> <span class="mi">1800</span>
+<span class="n">azi_range</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">]</span>
+
+<span class="n">integration_args2D</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;npt_rad&#39;</span><span class="p">:</span><span class="n">n_radial</span><span class="p">,</span> <span class="s1">&#39;npt_azim&#39;</span><span class="p">:</span><span class="n">n_azim</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span><span class="s1">&#39;2th_deg&#39;</span><span class="p">,</span><span class="s1">&#39;radial_range&#39;</span><span class="p">:</span><span class="n">radial_range</span><span class="p">,</span>
+                <span class="s1">&#39;mask&#39;</span><span class="p">:</span><span class="n">mask</span><span class="p">,</span> <span class="s1">&#39;polarization_factor&#39;</span><span class="p">:</span><span class="n">polarization_factor</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cake_data</span><span class="p">,</span> <span class="n">tt_deg</span><span class="p">,</span> <span class="n">azim_deg</span>  <span class="o">=</span> <span class="n">ai</span><span class="o">.</span><span class="n">integrate2d</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="o">**</span><span class="n">integration_args2D</span><span class="p">)</span>
+<span class="n">tt_stepsize</span> <span class="o">=</span> <span class="n">tt_deg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tt_deg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">cake_imshow_extent</span> <span class="o">=</span> <span class="p">(</span><span class="n">tt_deg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">tt_stepsize</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">tt_deg</span><span class="p">[</span><span class="mi">0</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">tt_stepsize</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="o">-</span><span class="mi">180</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cake_data</span><span class="p">,</span>
+           <span class="n">extent</span><span class="o">=</span><span class="n">cake_imshow_extent</span><span class="p">,</span>
+           <span class="n">vmin</span><span class="o">=</span><span class="n">ymax</span><span class="o">*</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">ymax</span><span class="o">*</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">0.03</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Azimuthally caked data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;2theta,(deg)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;eta,(deg)$&#39;</span><span class="p">)</span>
+<span class="c1"># fig.show()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;eta,(deg)$&#39;)
+</pre></div>
+</div>
+<img alt="../_images/6d9748a51b5624d1bd3bd610a48220de515e03a86b6ec3ee547367fe3a0345b3.png" src="../_images/6d9748a51b5624d1bd3bd610a48220de515e03a86b6ec3ee547367fe3a0345b3.png" />
+</div>
+</div>
+<p>The imported mask is only valid for 2D “raw” images. The 2D integration process is not linear (some 2D integrated pixels correspond to a combination of different pixel from the raw image). <br />
+In the next step, we create a mask for the 2D integrated pictures. Here, we create a 2D integrated mask (especially useful for eiger)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ones</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">ai</span><span class="o">.</span><span class="n">get_shape</span><span class="p">())</span>
+<span class="n">integration_args_trick</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;npt_rad&#39;</span><span class="p">:</span><span class="n">n_radial</span><span class="p">,</span> <span class="s1">&#39;npt_azim&#39;</span><span class="p">:</span><span class="n">n_azim</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span><span class="s1">&#39;2th_deg&#39;</span><span class="p">,</span><span class="s1">&#39;radial_range&#39;</span><span class="p">:(</span><span class="mi">3</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span>
+                          <span class="s1">&#39;mask&#39;</span><span class="p">:</span><span class="n">mask</span><span class="p">,</span> <span class="s1">&#39;polarization_factor&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;correctSolidAngle&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">}</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">variance</span> <span class="o">=</span> <span class="n">ai</span><span class="o">.</span><span class="n">integrate2d</span><span class="p">(</span><span class="n">ones</span><span class="p">,</span> <span class="n">variance</span><span class="o">=</span><span class="n">ones</span><span class="p">,</span> <span class="o">**</span><span class="n">integration_args_trick</span><span class="p">)</span>
+<span class="n">n_pix</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">variance</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">n_pix</span><span class="p">[</span><span class="n">variance</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">n_pix</span><span class="p">,</span>
+           <span class="n">extent</span><span class="o">=</span><span class="n">cake_imshow_extent</span><span class="p">,</span>
+           <span class="n">aspect</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Number of pixels per bin&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;2theta,(deg)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;eta,(deg)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+
+<span class="n">n_pix</span><span class="p">[</span><span class="n">n_pix</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">bins_mask</span> <span class="o">=</span> <span class="n">n_pix</span> <span class="o">&lt;</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmedian</span><span class="p">(</span><span class="n">n_pix</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">bins_mask</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">n_pix</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">bins_mask</span><span class="p">,</span>
+           <span class="n">extent</span><span class="o">=</span><span class="n">cake_imshow_extent</span><span class="p">,</span>
+           <span class="n">aspect</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Bad bins mask&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;2theta,(deg)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([])</span>
+<span class="c1"># fig.show()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_165678/1021340000.py:5: RuntimeWarning: divide by zero encountered in divide
+  n_pix = 1/variance**2
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Text(0, -200.0, &#39;&#39;),
+ Text(0, -150.0, &#39;&#39;),
+ Text(0, -100.0, &#39;&#39;),
+ Text(0, -50.0, &#39;&#39;),
+ Text(0, 0.0, &#39;&#39;),
+ Text(0, 50.0, &#39;&#39;),
+ Text(0, 100.0, &#39;&#39;),
+ Text(0, 150.0, &#39;&#39;),
+ Text(0, 200.0, &#39;&#39;)]
+</pre></div>
+</div>
+<img alt="../_images/825467b72f889f5c7eb376e4afbbed8bf5fe0cc8c6198ab0a9a7c5ed9dbe5e2c.png" src="../_images/825467b72f889f5c7eb376e4afbbed8bf5fe0cc8c6198ab0a9a7c5ed9dbe5e2c.png" />
+</div>
+</div>
+</section>
+<section id="background-substraction">
+<h2>Background substraction<a class="headerlink" href="#background-substraction" title="Permalink to this heading">#</a></h2>
+<section id="method-0">
+<h3>method 0<a class="headerlink" href="#method-0" title="Permalink to this heading">#</a></h3>
+<p>No background subtraction at all. This is valid for photon counting detectors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_radial</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="method-1">
+<h3>method 1<a class="headerlink" href="#method-1" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mean_data_radial = np.sum(~bins_mask*cake_data, axis = 0) / np.sum(~bins_mask, axis = 0)</span>
+<span class="c1"># peak_masks = [np.logical_and(tt_deg&gt;=tt_range[0], tt_deg&lt;tt_range[1]) for tt_range in tt_ranges] </span>
+<span class="c1"># any_peak_mask = np.sum(np.stack(peak_masks, axis = -1), axis = -1) &gt; 0</span>
+
+<span class="c1"># # Filter the peaks from the data</span>
+<span class="c1"># mean_data_nopeaks = mean_data_radial[~any_peak_mask]</span>
+<span class="c1"># tt_nopeaks = tt_deg[~any_peak_mask]</span>
+
+<span class="c1"># #Possibility to play on the bracket upper limit to fit more data or not</span>
+<span class="c1"># bg_fit_coeffs = np.polyfit(tt_nopeaks[100:1000], mean_data_nopeaks[100:1000], 0) </span>
+<span class="c1"># bg = np.polyval(bg_fit_coeffs, tt_deg)</span>
+<span class="c1"># bg = bg*0</span>
+
+<span class="c1"># fig = plt.figure()</span>
+<span class="c1"># ax = plt.subplot(2,1,1)</span>
+<span class="c1"># plt.plot(tt_deg, mean_data_radial)</span>
+<span class="c1"># plt.plot(tt_deg, bg)</span>
+<span class="c1"># plt.legend([&#39;Data&#39;, &#39;Background&#39;])</span>
+<span class="c1"># plt.xlim(3, 16.5)</span>
+<span class="c1"># plt.ylim(-ymax*0.01, ymax*0.2)</span>
+<span class="c1"># plt.grid()</span>
+
+<span class="c1"># ax = plt.subplot(2,1,2)</span>
+<span class="c1"># plt.plot(tt_deg, (mean_data_radial- bg), color = &#39;C2&#39;)</span>
+<span class="c1"># plt.ylabel(&#39;Data - Background&#39;)</span>
+<span class="c1"># plt.xlim(3, 16.5)</span>
+<span class="c1"># plt.ylim(-ymax*0.01, ymax*0.2)</span>
+<span class="c1"># plt.xlabel(r&#39;$2\theta\,\text{(deg)}$&#39;)</span>
+<span class="c1"># plt.grid()</span>
+<span class="c1"># fig.show()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # peak mask masks one column in the cake file where there is the 2 thetas corresponding to 1 hkl</span>
+<span class="c1"># cumul = 0</span>
+<span class="c1"># for ii, hkl in enumerate(peak_masks):</span>
+<span class="c1">#     plt.plot(hkl+ 1.2*cumul)</span>
+<span class="c1">#     cumul +=1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="method-2-with-background-not-for-eiger">
+<h3>method 2 (with background) / not for eiger<a class="headerlink" href="#method-2-with-background-not-for-eiger" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># bkg_path = f&#39;/data/visitor/{experiment_number}/id11/{experiment_date}/PROCESSED_DATA/Si_cube/bkg.edf&#39;</span>
+<span class="c1"># bkg = fabio.open(bkg_path).data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># q, bk_int = ai.integrate1d(bkg,**integration_args)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fig = plt.figure()</span>
+<span class="c1"># ax = plt.subplot(2,1,1)</span>
+<span class="c1"># plt.plot(tt_deg, mean_data_radial)</span>
+<span class="c1"># plt.plot(tt_deg,bk_int)</span>
+<span class="c1"># plt.legend([&#39;Data&#39;, &#39;Background&#39;])</span>
+<span class="c1"># plt.xlim(3, 16.5)</span>
+<span class="c1"># plt.ylim(108, 133)</span>
+<span class="c1"># plt.grid()</span>
+
+<span class="c1"># ax = plt.subplot(2,1,2)</span>
+<span class="c1"># plt.plot(tt_deg, (mean_data_radial- bk_int), color = &#39;C2&#39;)</span>
+<span class="c1"># plt.ylabel(&#39;Data - Background&#39;)</span>
+<span class="c1"># plt.xlim(3, 16.5)</span>
+<span class="c1"># plt.ylim(-3, 22)</span>
+<span class="c1"># plt.xlabel(r&#39;$2\theta\,\text{(deg)}$&#39;)</span>
+<span class="c1"># plt.grid()</span>
+<span class="c1"># fig.show()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="azimuthal-mask">
+<h2>Azimuthal mask<a class="headerlink" href="#azimuthal-mask" title="Permalink to this heading">#</a></h2>
+<p>In a previous step, we selected data only around particular two theta angles.<br />
+Here, we plot the 2D integrated mask at these particular two theta values (<em>i.e.</em> places where peaks touch the gaps).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bins_mask</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">peak_masks</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((1800, 2000), 2000)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cumul</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">figure</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">azimuthal_masks</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">ii</span><span class="p">,</span> <span class="n">hkl</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">bragg_tt_deg_list</span><span class="p">[:</span><span class="n">n_tth</span><span class="p">]):</span>
+    <span class="n">azimuthal_masks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="o">~</span><span class="n">bins_mask</span><span class="p">[:,</span> <span class="n">peak_masks</span><span class="p">[</span><span class="n">ii</span><span class="p">]],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">azimuthal_masks</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span> <span class="mf">1.2</span><span class="o">*</span><span class="n">cumul</span><span class="p">)</span>
+    <span class="n">cumul</span> <span class="o">+=</span><span class="mi">1</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">n_tth</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1">#On this graph, all lines on integers mean that the mask is equal to 1, otherwise 0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.5, 11.0)
+</pre></div>
+</div>
+<img alt="../_images/e342c5e166a5d9278bf2629480b64e68b02643bdf641d15e7960b7436b9037f8.png" src="../_images/e342c5e166a5d9278bf2629480b64e68b02643bdf641d15e7960b7436b9037f8.png" />
+</div>
+</div>
+</section>
+<section id="process-1-full-frame">
+<h2>Process 1 full frame<a class="headerlink" href="#process-1-full-frame" title="Permalink to this heading">#</a></h2>
+<p>Now that all parameters have been tuned on 1 image, we create a function to automatically process one frame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">process_one_frame</span><span class="p">(</span><span class="n">image_data</span><span class="p">):</span>
+
+    <span class="n">cake_data</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span>  <span class="o">=</span> <span class="n">ai</span><span class="o">.</span><span class="n">integrate2d</span><span class="p">(</span><span class="n">image_data</span><span class="p">,</span> <span class="o">**</span><span class="n">integration_args2D</span><span class="p">)</span>
+    <span class="n">cake_data</span> <span class="o">=</span> <span class="n">cake_data</span> <span class="o">-</span> <span class="n">bg</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">output_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">peak_mask</span> <span class="ow">in</span> <span class="n">peak_masks</span><span class="p">:</span>
+        <span class="n">this_peak_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">cake_data</span><span class="p">[:,</span> <span class="n">peak_mask</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">output_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">this_peak_data</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">output_data</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    
+<span class="n">integrated_data</span> <span class="o">=</span> <span class="n">process_one_frame</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+
+<span class="n">plot_scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">integrated_data</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">hkl_index</span><span class="p">,</span> <span class="n">hkl</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">hkl_list</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">hkl_index</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">azim_deg</span><span class="p">,</span> <span class="n">integrated_data</span><span class="p">[:,</span> <span class="n">hkl_index</span><span class="p">]</span> <span class="o">+</span> <span class="n">hkl_index</span> <span class="o">*</span> <span class="n">plot_scale</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="n">hkl_index</span> <span class="o">*</span> <span class="n">plot_scale</span> <span class="o">+</span> <span class="n">plot_scale</span><span class="o">/</span><span class="mi">5</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">hkl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}{</span><span class="n">hkl</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}{</span><span class="n">hkl</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;C</span><span class="si">{</span><span class="n">hkl_index</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">hkl_index</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">azim_deg</span><span class="p">,</span> <span class="n">integrated_data</span><span class="p">[:,</span> <span class="n">hkl_index</span><span class="p">]</span><span class="o">*</span><span class="mi">10</span> <span class="o">+</span> <span class="n">hkl_index</span> <span class="o">*</span> <span class="n">plot_scale</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">hkl_index</span> <span class="o">*</span> <span class="n">plot_scale</span> <span class="o">+</span> <span class="n">plot_scale</span><span class="o">/</span><span class="mi">5</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">hkl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}{</span><span class="n">hkl</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}{</span><span class="n">hkl</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s1"> (times 10)&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;C</span><span class="si">{</span><span class="n">hkl_index</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Azimuthally integrated peaks&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hkl_list</span><span class="p">))</span><span class="o">*</span><span class="n">plot_scale</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="p">[])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>
+<span class="c1"># plt.ylim(-1e4, 2.3e5)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\eta\,\text{(deg)}$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/24c5a36142b97db98204ba114fe591972d69e9d252d6930c83fa25b0c7c0cdc0.png" src="../_images/24c5a36142b97db98204ba114fe591972d69e9d252d6930c83fa25b0c7c0cdc0.png" />
+</div>
+</div>
+<p>Saving all the integration parameters for later, and the future you will be happy to found these somewhere.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">integration_metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;npt_azim&#39;</span><span class="p">:</span> <span class="n">n_azim</span><span class="p">,</span>
+                  <span class="s1">&#39;npt_rad&#39;</span><span class="p">:</span> <span class="n">n_radial</span><span class="p">,</span>
+                  <span class="s1">&#39;radial_range&#39;</span><span class="p">:</span><span class="n">radial_range</span><span class="p">,</span>
+                  <span class="s1">&#39;poni_path&#39;</span><span class="p">:</span> <span class="n">poni_path</span><span class="p">,</span>
+                  <span class="s1">&#39;mask_path&#39;</span><span class="p">:</span> <span class="n">mask_path</span><span class="p">,</span>
+                  <span class="s1">&#39;polarization_factor&#39;</span><span class="p">:</span> <span class="n">polarization_factor</span><span class="p">,</span>
+                  <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="n">unit</span><span class="p">,</span>
+                 <span class="p">}</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;wavelength&#39;</span><span class="p">:</span><span class="n">wavelength</span><span class="p">,</span>
+        <span class="s1">&#39;bragg_tt_deg_list&#39;</span><span class="p">:</span><span class="n">bragg_tt_deg_list</span><span class="p">[:</span><span class="n">n_tth</span><span class="p">],</span>
+        <span class="s1">&#39;hkl_list&#39;</span><span class="p">:</span><span class="n">hkl_list</span><span class="p">,</span>
+        <span class="s1">&#39;tt_ranges&#39;</span><span class="p">:</span><span class="n">tt_ranges</span><span class="p">,</span>
+        <span class="s1">&#39;peak_masks&#39;</span><span class="p">:</span><span class="n">peak_masks</span><span class="p">,</span>
+        <span class="s1">&#39;azimuthal_masks&#39;</span><span class="p">:</span><span class="n">azimuthal_masks</span><span class="p">,</span>
+        <span class="s1">&#39;bg&#39;</span><span class="p">:</span><span class="n">bg</span><span class="p">,</span>
+         <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Check that every lists is the same length. Otherwise there is a problem</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="k">if</span> <span class="s1">&#39;wave&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">k</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">])</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bragg_tt_deg_list: 9
+hkl_list: 9
+tt_ranges: 9
+peak_masks: 9
+azimuthal_masks: 9
+bg: 2000
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="save-integration-mask-parameters">
+<h2>Save integration / mask parameters<a class="headerlink" href="#save-integration-mask-parameters" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;auxillary_files/phase_data.npy&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fid</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">fid</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;auxillary_files/integration_metadata.npy&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fid</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">integration_metadata</span><span class="p">,</span> <span class="n">fid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Do this integration for every picture of every sample you have. <br />
+Here we set up a folder were thes integrated intensities will be saved.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output_folder</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;/data/visitor/</span><span class="si">{</span><span class="n">experiment_number</span><span class="si">}</span><span class="s1">/id11/</span><span class="si">{</span><span class="n">experiment_date</span><span class="si">}</span><span class="s1">/PROCESSED_DATA/integrated_intensities/</span><span class="si">{</span><span class="n">sample</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">sample</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">dataset</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">output_folder</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;/data/visitor/ma6795/id11/20250826/PROCESSED_DATA/integrated_intensities/textom_posth14_post_beamdown&#39;,
+ &#39;textom_posth14_post_beamdown_z0_redo&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>PS : if you run this script for the first time and get a “file not found error”, you may have to manually create a integrated intensities within the PROCESSED_DATA folder.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">output_folder</span><span class="p">)[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">output_folder</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">output_folder</span><span class="p">)</span>
+<span class="k">elif</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">output_folder</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">output_folder</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="launch-batch-script-to-process-multiple-images">
+<h2>Launch batch script to process multiple images<a class="headerlink" href="#launch-batch-script-to-process-multiple-images" title="Permalink to this heading">#</a></h2>
+<p>Double checking where we will save everything</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dataset : </span><span class="si">{}</span><span class="s1">, output folder : </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">output_folder</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dataset : z0_redo, output folder : /data/visitor/ma6795/id11/20250826/PROCESSED_DATA/integrated_intensities/textom_posth14_post_beamdown/textom_posth14_post_beamdown_z0_redo
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the next cell, we send all jobs to the cluster to perform the cake integration and save the integrated intensities in the output folder. <br />
+It represents a lot of slurm jobs, make sure everything is ready before executing this cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="c1"># Make folder for slurm.out files</span>
+<span class="n">slurm_logfiles_folder</span> <span class="o">=</span> <span class="s1">&#39;slurm_logfiles&#39;</span>
+<span class="c1">#Create a folder where the integrated intensities will be saved</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">slurm_logfiles_folder</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">slurm_logfiles_folder</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">slize_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+    <span class="c1">#dataset = f&#39;z{slize_index}&#39;</span>
+    <span class="n">dataset</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;z</span><span class="si">{</span><span class="n">slize_index</span><span class="si">}</span><span class="s1">_redo&#39;</span>
+    <span class="n">name_output</span> <span class="o">=</span> <span class="n">dataset</span>
+    <span class="n">output_folder</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;/data/visitor/</span><span class="si">{</span><span class="n">experiment_number</span><span class="si">}</span><span class="s1">/id11/</span><span class="si">{</span><span class="n">experiment_date</span><span class="si">}</span><span class="s1">/PROCESSED_DATA/integrated_intensities/</span><span class="si">{</span><span class="n">sample</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">sample</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">dataset</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">output_folder</span><span class="p">)</span>
+    <span class="c1">#Create a folder where the integrated intensities will be saved</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">output_folder</span><span class="p">)[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">output_folder</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">output_folder</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">output_folder</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">output_folder</span><span class="p">)</span>
+        
+    <span class="c1"># Set up the functions and create a dat in processed folder</span>
+    <span class="n">write_init</span><span class="p">(</span><span class="n">sample</span> <span class="o">=</span> <span class="n">sample</span><span class="p">,</span> <span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">experiment</span> <span class="o">=</span> <span class="n">experiment_number</span><span class="p">,</span> 
+               <span class="n">date</span> <span class="o">=</span> <span class="n">experiment_date</span><span class="p">,</span> <span class="n">detector</span> <span class="o">=</span> <span class="n">detector</span><span class="p">,</span> 
+               <span class="n">number_of_rotations</span> <span class="o">=</span> <span class="n">number_of_rotations</span><span class="p">,</span> <span class="n">outfile</span> <span class="o">=</span> <span class="n">name_output</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">position_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_files</span><span class="p">):</span> 
+        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;sbatch batch_scripts/</span><span class="si">{</span><span class="n">name_output</span><span class="si">}</span><span class="s2">.slurm </span><span class="si">{</span><span class="n">position_index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Current working directory : /gpfs/easy/data/id11/inhouse1/Texture_workflow/texture_tutorial/SCRIPTS
+Submitted batch job 27297282
+Submitted batch job 27297283
+Submitted batch job 27297284
+Submitted batch job 27297285
+Submitted batch job 27297286
+Submitted batch job 27297287
+Submitted batch job 27297288
+Submitted batch job 27297289
+Submitted batch job 27297290
+Submitted batch job 27297291
+Submitted batch job 27297292
+Submitted batch job 27297293
+Submitted batch job 27297294
+Submitted batch job 27297295
+Submitted batch job 27297296
+Submitted batch job 27297297
+Submitted batch job 27297298
+Submitted batch job 27297299
+Submitted batch job 27297300
+Submitted batch job 27297301
+Submitted batch job 27297302
+Submitted batch job 27297303
+Submitted batch job 27297304
+Submitted batch job 27297305
+Submitted batch job 27297306
+Submitted batch job 27297307
+Submitted batch job 27297308
+Submitted batch job 27297309
+Submitted batch job 27297310
+Submitted batch job 27297311
+Submitted batch job 27297312
+Submitted batch job 27297313
+Submitted batch job 27297314
+Submitted batch job 27297315
+Submitted batch job 27297316
+Submitted batch job 27297317
+Submitted batch job 27297318
+Submitted batch job 27297319
+Submitted batch job 27297320
+Submitted batch job 27297321
+Submitted batch job 27297322
+Submitted batch job 27297323
+Submitted batch job 27297324
+Submitted batch job 27297325
+Submitted batch job 27297326
+Submitted batch job 27297327
+Submitted batch job 27297328
+Submitted batch job 27297329
+Submitted batch job 27297330
+Submitted batch job 27297331
+Submitted batch job 27297332
+Submitted batch job 27297333
+Submitted batch job 27297334
+Submitted batch job 27297335
+Submitted batch job 27297336
+Submitted batch job 27297337
+Submitted batch job 27297338
+Submitted batch job 27297339
+Submitted batch job 27297340
+Submitted batch job 27297341
+Submitted batch job 27297342
+Submitted batch job 27297343
+Submitted batch job 27297344
+Submitted batch job 27297345
+Submitted batch job 27297346
+Submitted batch job 27297347
+Submitted batch job 27297348
+Submitted batch job 27297349
+Submitted batch job 27297350
+Submitted batch job 27297351
+Submitted batch job 27297352
+Submitted batch job 27297353
+Submitted batch job 27297354
+Submitted batch job 27297355
+Submitted batch job 27297356
+Submitted batch job 27297357
+Submitted batch job 27297358
+Submitted batch job 27297359
+Submitted batch job 27297360
+Submitted batch job 27297361
+Submitted batch job 27297362
+Submitted batch job 27297363
+Submitted batch job 27297364
+Submitted batch job 27297365
+Submitted batch job 27297366
+Submitted batch job 27297367
+Submitted batch job 27297368
+Submitted batch job 27297369
+Submitted batch job 27297370
+Submitted batch job 27297371
+Submitted batch job 27297372
+Submitted batch job 27297373
+Submitted batch job 27297374
+Submitted batch job 27297375
+Submitted batch job 27297376
+Submitted batch job 27297377
+Submitted batch job 27297378
+Submitted batch job 27297379
+Submitted batch job 27297380
+Submitted batch job 27297381
+Submitted batch job 27297382
+Submitted batch job 27297383
+Submitted batch job 27297384
+Submitted batch job 27297385
+Submitted batch job 27297386
+Current working directory : /gpfs/easy/data/id11/inhouse1/Texture_workflow/texture_tutorial/SCRIPTS
+Submitted batch job 27297387
+Submitted batch job 27297388
+Submitted batch job 27297389
+Submitted batch job 27297390
+Submitted batch job 27297391
+Submitted batch job 27297392
+Submitted batch job 27297393
+Submitted batch job 27297394
+Submitted batch job 27297395
+Submitted batch job 27297396
+Submitted batch job 27297397
+Submitted batch job 27297398
+Submitted batch job 27297399
+Submitted batch job 27297400
+Submitted batch job 27297401
+Submitted batch job 27297402
+Submitted batch job 27297403
+Submitted batch job 27297405
+Submitted batch job 27297407
+Submitted batch job 27297408
+Submitted batch job 27297409
+Submitted batch job 27297410
+Submitted batch job 27297411
+Submitted batch job 27297412
+Submitted batch job 27297413
+Submitted batch job 27297414
+Submitted batch job 27297415
+Submitted batch job 27297416
+Submitted batch job 27297417
+Submitted batch job 27297418
+Submitted batch job 27297419
+Submitted batch job 27297420
+Submitted batch job 27297421
+Submitted batch job 27297422
+Submitted batch job 27297423
+Submitted batch job 27297424
+Submitted batch job 27297425
+Submitted batch job 27297426
+Submitted batch job 27297427
+Submitted batch job 27297428
+Submitted batch job 27297429
+Submitted batch job 27297430
+Submitted batch job 27297431
+Submitted batch job 27297432
+Submitted batch job 27297433
+Submitted batch job 27297434
+Submitted batch job 27297435
+Submitted batch job 27297436
+Submitted batch job 27297437
+Submitted batch job 27297438
+Submitted batch job 27297439
+Submitted batch job 27297440
+Submitted batch job 27297441
+Submitted batch job 27297442
+Submitted batch job 27297443
+Submitted batch job 27297444
+Submitted batch job 27297445
+Submitted batch job 27297446
+Submitted batch job 27297447
+Submitted batch job 27297448
+Submitted batch job 27297449
+Submitted batch job 27297450
+Submitted batch job 27297451
+Submitted batch job 27297452
+Submitted batch job 27297453
+Submitted batch job 27297454
+Submitted batch job 27297455
+Submitted batch job 27297456
+Submitted batch job 27297457
+Submitted batch job 27297458
+Submitted batch job 27297459
+Submitted batch job 27297460
+Submitted batch job 27297461
+Submitted batch job 27297462
+Submitted batch job 27297463
+Submitted batch job 27297464
+Submitted batch job 27297465
+Submitted batch job 27297466
+Submitted batch job 27297467
+Submitted batch job 27297468
+Submitted batch job 27297469
+Submitted batch job 27297470
+Submitted batch job 27297471
+Submitted batch job 27297472
+Submitted batch job 27297473
+Submitted batch job 27297474
+Submitted batch job 27297475
+Submitted batch job 27297476
+Submitted batch job 27297477
+Submitted batch job 27297478
+Submitted batch job 27297479
+Submitted batch job 27297480
+Submitted batch job 27297481
+Submitted batch job 27297482
+Submitted batch job 27297483
+Submitted batch job 27297484
+Submitted batch job 27297485
+Submitted batch job 27297486
+Submitted batch job 27297487
+Submitted batch job 27297488
+Submitted batch job 27297489
+Submitted batch job 27297490
+Submitted batch job 27297491
+Submitted batch job 27297492
+Submitted batch job 27297493
+Current working directory : /gpfs/easy/data/id11/inhouse1/Texture_workflow/texture_tutorial/SCRIPTS
+Submitted batch job 27297494
+Submitted batch job 27297495
+Submitted batch job 27297496
+Submitted batch job 27297497
+Submitted batch job 27297498
+Submitted batch job 27297499
+Submitted batch job 27297500
+Submitted batch job 27297501
+Submitted batch job 27297502
+Submitted batch job 27297503
+Submitted batch job 27297504
+Submitted batch job 27297505
+Submitted batch job 27297506
+Submitted batch job 27297507
+Submitted batch job 27297508
+Submitted batch job 27297509
+Submitted batch job 27297510
+Submitted batch job 27297511
+Submitted batch job 27297512
+Submitted batch job 27297513
+Submitted batch job 27297514
+Submitted batch job 27297515
+Submitted batch job 27297516
+Submitted batch job 27297517
+Submitted batch job 27297518
+Submitted batch job 27297519
+Submitted batch job 27297520
+Submitted batch job 27297521
+Submitted batch job 27297522
+Submitted batch job 27297523
+Submitted batch job 27297524
+Submitted batch job 27297525
+Submitted batch job 27297526
+Submitted batch job 27297527
+Submitted batch job 27297528
+Submitted batch job 27297529
+Submitted batch job 27297530
+Submitted batch job 27297531
+Submitted batch job 27297532
+Submitted batch job 27297533
+Submitted batch job 27297534
+Submitted batch job 27297535
+Submitted batch job 27297536
+Submitted batch job 27297537
+Submitted batch job 27297538
+Submitted batch job 27297539
+Submitted batch job 27297540
+Submitted batch job 27297541
+Submitted batch job 27297542
+Submitted batch job 27297543
+Submitted batch job 27297544
+Submitted batch job 27297545
+Submitted batch job 27297546
+Submitted batch job 27297547
+Submitted batch job 27297548
+Submitted batch job 27297550
+Submitted batch job 27297552
+Submitted batch job 27297553
+Submitted batch job 27297554
+Submitted batch job 27297555
+Submitted batch job 27297556
+Submitted batch job 27297557
+Submitted batch job 27297558
+Submitted batch job 27297559
+Submitted batch job 27297560
+Submitted batch job 27297561
+Submitted batch job 27297562
+Submitted batch job 27297563
+Submitted batch job 27297564
+Submitted batch job 27297565
+Submitted batch job 27297566
+Submitted batch job 27297567
+Submitted batch job 27297568
+Submitted batch job 27297569
+Submitted batch job 27297570
+Submitted batch job 27297571
+Submitted batch job 27297572
+Submitted batch job 27297573
+Submitted batch job 27297574
+Submitted batch job 27297575
+Submitted batch job 27297576
+Submitted batch job 27297577
+Submitted batch job 27297578
+Submitted batch job 27297579
+Submitted batch job 27297580
+Submitted batch job 27297581
+Submitted batch job 27297582
+Submitted batch job 27297583
+Submitted batch job 27297584
+Submitted batch job 27297585
+Submitted batch job 27297586
+Submitted batch job 27297587
+Submitted batch job 27297588
+Submitted batch job 27297589
+Submitted batch job 27297590
+Submitted batch job 27297591
+Submitted batch job 27297592
+Submitted batch job 27297593
+Submitted batch job 27297594
+Submitted batch job 27297595
+Submitted batch job 27297596
+Submitted batch job 27297597
+Submitted batch job 27297598
+Submitted batch job 27297599
+Submitted batch job 27297600
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./SCRIPTS"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to your Jupyter Book</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="11_Collect_and_downsample.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2 - Collect and downsamples</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters-of-the-experiment">Parameters of the experiment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-1-frame">Load 1 frame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chosing-pyfai-integration-parameters">Chosing pyFAI integration parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-peak-positions">Finding the peak positions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-azimuthal-integration">2d azimuthal integration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background-substraction">Background substraction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-0">method 0</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1">method 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-with-background-not-for-eiger">method 2 (with background) / not for eiger</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#azimuthal-mask">Azimuthal mask</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#process-1-full-frame">Process 1 full frame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-integration-mask-parameters">Save integration / mask parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#launch-batch-script-to-process-multiple-images">Launch batch script to process multiple images</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
