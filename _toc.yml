@@ -1,0 +1,11 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: SCRIPTS/10_azimuthal_integration
+- file: SCRIPTS/11_Collect_and_downsample
+- file: SCRIPTS/12_Geometry_and_corrections
+- file: SCRIPTS/13_Reconstruct_slice_by_slice
+- file: SCRIPTS/14_plot_3d_tomogram

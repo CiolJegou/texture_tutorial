@@ -1,0 +1,12 @@
+# Nota: C-Order, 1 refers to the Y axis, 2 to the X axis 
+# Calibration done at Thu Sep 04 15:00:18 2025
+poni_version: 2
+Detector: NexusDetector
+Detector_config: {"filename": "/data/id11/inhouse1/Texture_workflow/tutorial/SCRIPTS/newSpatial_20250819.h5"}
+Distance: 0.1919439729734817
+Poni1: 0.08366930769283185
+Poni2: 0.07921783479970702
+Rot1: -0.0035981586439429135
+Rot2: 0.0007182543984372907
+Rot3: 0.00045937167000979345
+Wavelength: 1.894669763409837e-11
